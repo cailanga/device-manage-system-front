@@ -72,53 +72,89 @@
         </el-col>
 
       <!-- 维修-->
-      <el-dialog title="维修情况" :visible.sync="maintainDataShow" :close-on-click-modal="false">
-        <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-          <el-form :inline="true">
+      <el-dialog title="维修情况" :visible.sync="maintainDataShow" :close-on-click-modal="false" width="1000px">
+        <el-row>
+          <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
+            <el-form :inline="true">
               <el-form-item>
-                  <el-button type="primary" @click="maintainRecordAdd">新增维修记录</el-button>
+                <el-button type="primary" @click="maintainRecordAdd">新增维修记录</el-button>
               </el-form-item>
-          </el-form>
-        </el-col>
-        <el-table :data="pageInfo1.rows" highlight-current-row v-loading="listLoading" @selection-change="selsChange"
-                  style="width: 100%;">
-          <el-table-column type="selection" width="55">
-          </el-table-column>
-          <el-table-column type="index" width="60">
-          </el-table-column>
-          <el-table-column prop="cause" label="维修原因" sortable>
-          </el-table-column>
-          <el-table-column prop="date" label="维修时间" sortable>
-          </el-table-column>
-          <el-table-column prop="description" label="维修描述" sortable>
-          </el-table-column>
-          <el-table-column prop="operator.username" label="记录人员" sortable>
-          </el-table-column>
-        </el-table>
+            </el-form>
+          </el-col>
+          <el-col :span="24" class="content">
+            <el-table :data="pageInfo1.rows" highlight-current-row v-loading="listLoading" @selection-change="selsChange"
+                      style="width: 100%;">
+              <el-table-column type="selection" width="55">
+              </el-table-column>
+              <el-table-column type="index" width="60">
+              </el-table-column>
+              <el-table-column prop="cause" label="维修原因" sortable>
+              </el-table-column>
+              <el-table-column prop="date" label="维修时间" sortable width="200px">
+              </el-table-column>
+              <el-table-column prop="description" label="维修描述" sortable>
+              </el-table-column>
+              <el-table-column prop="operator.username" label="记录人员" sortable>
+              </el-table-column>
+              <el-table-column prop="createTime" label="记录时间" sortable width="200px">
+              </el-table-column>
+            </el-table>
+          </el-col>
+          <!--工具条-->
+          <el-col :span="24" class="toolbar">
+            <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange1"
+                :current-page="query.currentPage"
+                :page-sizes="pageSizes"
+                :page-size="query.pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="pageInfo1.total">
+            </el-pagination>
+          </el-col>
+        </el-row>
+
       </el-dialog>
-      <el-dialog title="报废情况" :visible.sync="disablesDataShow" :close-on-click-modal="false">
-        <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-          <el-form :inline="true">
-            <el-form-item>
-              <el-button type="primary" @click="disableRecordAdd">新增报废记录</el-button>
-            </el-form-item>
-          </el-form>
-        </el-col>
-        <el-table :data="pageInfo2.rows" highlight-current-row v-loading="listLoading" @selection-change="selsChange"
-                  style="width: 100%;">
-          <el-table-column type="selection" width="55">
-          </el-table-column>
-          <el-table-column type="index" width="60">
-          </el-table-column>
-          <el-table-column prop="cause" label="报废原因" sortable>
-          </el-table-column>
-          <el-table-column prop="date" label="报废时间" sortable>
-          </el-table-column>
-          <el-table-column prop="description" label="报废描述" sortable>
-          </el-table-column>
-          <el-table-column prop="operator.username" label="记录人员" sortable>
-          </el-table-column>
-        </el-table>
+      <el-dialog width="1000px" title="报废情况" :visible.sync="disablesDataShow" :close-on-click-modal="false">
+        <el-row>
+          <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
+            <el-form :inline="true">
+              <el-form-item>
+                <el-button type="primary" @click="disableRecordAdd">新增报废记录</el-button>
+              </el-form-item>
+            </el-form>
+          </el-col>
+          <el-table :data="pageInfo2.rows" highlight-current-row v-loading="listLoading" @selection-change="selsChange"
+                    style="width: 100%;">
+            <el-table-column type="selection" width="55">
+            </el-table-column>
+            <el-table-column type="index" width="60">
+            </el-table-column>
+            <el-table-column prop="cause" label="报废原因" sortable>
+            </el-table-column>
+            <el-table-column prop="date" label="报废时间" sortable>
+            </el-table-column>
+            <el-table-column prop="description" label="报废描述" sortable>
+            </el-table-column>
+            <el-table-column prop="operator.username" label="记录人员" sortable>
+            </el-table-column>
+            <el-table-column prop="createTime" label="记录时间" sortable>
+            </el-table-column>
+          </el-table>
+          <!--工具条-->
+          <el-col :span="24" class="toolbar">
+            <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange2"
+                :current-page="query.currentPage"
+                :page-sizes="pageSizes"
+                :page-size="query.pageSize"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="pageInfo2.total">
+            </el-pagination>
+          </el-col>
+        </el-row>
+
       </el-dialog>
 
       <el-dialog title="新增维修记录" :visible.sync="maintainRecordAddShow" :close-on-click-modal="false">
@@ -167,56 +203,6 @@
           <el-button type="primary" @click.native="disableRecordAddSubmit" :loading="saveLoading">提交</el-button>
         </div>
       </el-dialog>
-      <!--领用界面-->
-<!--      <el-dialog title="领用" :visible.sync="saveFormVisible" :close-on-click-modal="false">
-        <el-form :model="saveForm" label-width="80px" :rules="saveFormRules" ref="saveForm">
-          <el-form-item label="名称">
-            <el-input v-model="saveForm.name" auto-complete="off" disabled></el-input>
-          </el-form-item>
-          <el-form-item label="价格">
-            <el-input v-model="saveForm.price" auto-complete="off" disabled></el-input>
-          </el-form-item>
-          <el-form-item label="数量">
-            <el-input v-model="saveForm.count" auto-complete="off" :min="1" :max="saveForm.max" type="number"></el-input>
-          </el-form-item>
-          <el-form-item label="描述">
-            <el-input disabled v-model="saveForm.description" auto-complete="off"></el-input>
-          </el-form-item>
-          <el-form-item label="类型">
-            <el-select disabled v-model="saveForm.typeId">
-              <el-option :value="item.id" :label="item.name" v-for="item in goodsTypes"/>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="商家">
-            <el-select disabled v-model="saveForm.sellerId">
-              <el-option :value="item.id" :label="item.name" v-for="item in sellers"/>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="领取部门">
-            <el-cascader
-                v-model="saveForm.deptParent"
-                :options="deptTree"
-                :props="{
-                             checkStrictly: true,
-                             label:'name',
-                             value:'id',
-                             'disabled': 'disabled'
-                            }"></el-cascader>
-          </el-form-item>
-          <el-form-item label="领用人">
-            <el-select v-model="saveForm.useId">
-              <el-option :value="item.id" :label="item.username" v-for="item in employees"/>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="备注">
-            <el-input v-model="saveForm.remark" auto-complete="off"></el-input>
-          </el-form-item>
-        </el-form>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click.native="saveFormVisible=false">取消</el-button>
-          <el-button type="primary" @click.native="saveSubmit" :loading="saveLoading">提交</el-button>
-        </div>
-      </el-dialog>-->
     </section>
 </template>
 
@@ -393,9 +379,15 @@ export default {
             })
       },
       maintain(index,row) {
+        this.query={
+          currentPage: 1,
+          pageSize: 10,
+          keyword: ""
+        }
         this.maintainDataShow=true
         this.handleId=row.id
         this.query.goodsId = row.id
+
         //获取维修数据
         this.getMaintainData()
       },
@@ -420,6 +412,11 @@ export default {
             })
       },
       disabled(index,row) {
+        this.query={
+          currentPage: 1,
+          pageSize: 10,
+          keyword: ""
+        }
         this.disablesDataShow=true
         this.handleId=row.id
         this.query.goodsId = row.id
@@ -514,6 +511,16 @@ export default {
             this.query.currentPage = val;
             this.getGoods();
         },
+      //处理页码变化时
+      handleCurrentChange1(val) {
+        this.query.currentPage = val;
+        this.getGoods();
+      },
+      //处理页码变化时
+      handleCurrentChange2(val) {
+        this.query.currentPage = val;
+        this.getGoods();
+      },
         //查询
         search() {
             this.query.currentPage = 1;
@@ -723,5 +730,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
