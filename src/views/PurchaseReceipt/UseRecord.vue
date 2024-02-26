@@ -86,13 +86,13 @@
           </el-table-column>
           <el-table-column type="index" width="60">
           </el-table-column>
-          <el-table-column prop="course" label="维修原因" sortable>
-          </el-table-column>
-          <el-table-column prop="status" label="维修状态" sortable>
+          <el-table-column prop="cause" label="维修原因" sortable>
           </el-table-column>
           <el-table-column prop="date" label="维修时间" sortable>
           </el-table-column>
-          <el-table-column prop="operator" label="维修人员" sortable>
+          <el-table-column prop="description" label="维修描述" sortable>
+          </el-table-column>
+          <el-table-column prop="operator.username" label="记录人员" sortable>
           </el-table-column>
         </el-table>
       </el-dialog>
@@ -110,15 +110,62 @@
           </el-table-column>
           <el-table-column type="index" width="60">
           </el-table-column>
-          <el-table-column prop="course" label="报废原因" sortable>
-          </el-table-column>
-          <el-table-column prop="status" label="报废状态" sortable>
+          <el-table-column prop="cause" label="报废原因" sortable>
           </el-table-column>
           <el-table-column prop="date" label="报废时间" sortable>
           </el-table-column>
-          <el-table-column prop="operator" label="报废人员" sortable>
+          <el-table-column prop="description" label="报废描述" sortable>
+          </el-table-column>
+          <el-table-column prop="operator.username" label="记录人员" sortable>
           </el-table-column>
         </el-table>
+      </el-dialog>
+
+      <el-dialog title="新增维修记录" :visible.sync="maintainRecordAddShow" :close-on-click-modal="false">
+        <el-form :model="maintainRecordForm" label-width="80px" :rules="saveFormRules" ref="maintainRecordForm">
+          <el-form-item label="维修原因">
+            <el-input v-model="maintainRecordForm.cause" auto-complete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="维修时间">
+            <el-date-picker
+                v-model="maintainRecordForm.date"
+                type="datetime"
+                placeholder="选择日期"
+                format="yyyy-MM-dd HH:mm:ss"
+                value-format="yyyy-MM-dd HH:mm:ss">
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item label="维修描述">
+            <el-input v-model="maintainRecordForm.description" auto-complete="off"></el-input>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click.native="maintainRecordAddShow=false">取消</el-button>
+          <el-button type="primary" @click.native="maintainRecordAddSubmit" :loading="saveLoading">提交</el-button>
+        </div>
+      </el-dialog>
+      <el-dialog title="新增报废记录" :visible.sync="disableRecordAddShow" :close-on-click-modal="false">
+        <el-form :model="disableRecordForm" label-width="80px" :rules="saveFormRules" ref="disableRecordForm">
+          <el-form-item label="报废原因">
+            <el-input v-model="disableRecordForm.cause" auto-complete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="报废时间">
+            <el-date-picker
+                v-model="disableRecordForm.date"
+                type="datetime"
+                placeholder="选择日期"
+                format="yyyy-MM-dd HH:mm:ss"
+                value-format="yyyy-MM-dd HH:mm:ss">
+            </el-date-picker>
+          </el-form-item>
+          <el-form-item label="报废描述">
+            <el-input v-model="disableRecordForm.description" auto-complete="off"></el-input>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click.native="disableRecordAddShow=false">取消</el-button>
+          <el-button type="primary" @click.native="disableRecordAddSubmit" :loading="saveLoading">提交</el-button>
+        </div>
       </el-dialog>
       <!--领用界面-->
 <!--      <el-dialog title="领用" :visible.sync="saveFormVisible" :close-on-click-modal="false">
@@ -223,6 +270,18 @@ export default {
           saveFormVisible1: false,//维修情况界面是否显示
           saveLoading1: false,
           maintainDataShow:false,
+          disableRecordForm:{
+            cause:"",
+            date:"",
+            description:""
+          },
+          disableRecordAddShow:false,
+          maintainRecordForm:{
+            cause:"",
+            date:"",
+            description:""
+          },
+          maintainRecordAddShow:false,
           saveFormVisible2: false,//报废情况界面是否显示
           saveLoading2: false,
           disablesDataShow:false,
@@ -234,24 +293,138 @@ export default {
             total: 0,
             rows: []
           },
+          //维修或者报废对应的设备id
+          handleId:null,
         }
-
-
     },
     methods: {
+      disableRecordAddSubmit(){
+        this.$confirm('确认提交吗？', '提示', {}).then(() => {
+          this.saveLoading = true;
+
+          var user = localStorage.getItem('loginUser');
+          if (user) {
+            user = JSON.parse(user);
+            this.disableRecordForm.operatorId = user.id
+          }
+          this.disableRecordForm.goodsId = this.handleId
+          this.$http.put("/disable", this.disableRecordForm).then((data) => {
+            this.saveLoading = false;
+            data = data.data
+            if (data.success) {
+              this.$message({
+                message: '操作成功',
+                type: 'success'
+              });
+              this.disableRecordAddShow = false;
+              this.getDisableData();
+            } else {
+              this.$message({
+                message: data.message,
+                type: 'error'
+              });
+            }
+          });
+        });
+      },
+      maintainRecordAddSubmit(){
+        this.$confirm('确认提交吗？', '提示', {}).then(() => {
+          this.saveLoading = true;
+
+          var user = localStorage.getItem('loginUser');
+          if (user) {
+            user = JSON.parse(user);
+            this.maintainRecordForm.operatorId = user.id
+          }
+          this.maintainRecordForm.goodsId = this.handleId
+          this.$http.put("/maintain", this.maintainRecordForm).then((data) => {
+            this.saveLoading = false;
+            data = data.data
+            if (data.success) {
+              this.$message({
+                message: '操作成功',
+                type: 'success'
+              });
+              this.maintainRecordAddShow = false;
+              this.getMaintainData();
+            } else {
+              this.$message({
+                message: data.message,
+                type: 'error'
+              });
+            }
+          });
+        });
+      },
       maintainRecordAdd(){
-        this.saveFormVisible1 = true;
+        this.maintainRecordAddShow = true;
+        this.maintainRecordForm={
+          cause:"",
+          date:"",
+          description:""
+        };
       },
       disableRecordAdd(){
-        this.saveFormVisible2 = true;
+        this.disableRecordAddShow = true;
+        this.disableRecordForm={
+          cause:"",
+          date:"",
+          description:""
+        }
+      },
+      getMaintainData(){
+        this.$http.post("/maintain", this.query)
+            .then(data => {
+              data = data.data
+              if (data.success) {
+                this.pageInfo1 = data.resultObject;
+              } else {
+                this.$message({
+                  message: data.message,
+                  type: 'error'
+                });
+              }
+            })
+            .catch(data => {
+              this.$message({
+                message: '网络错误，请重试！',
+                type: 'error'
+              });
+            })
       },
       maintain(index,row) {
         this.maintainDataShow=true
+        this.handleId=row.id
+        this.query.goodsId = row.id
         //获取维修数据
+        this.getMaintainData()
+      },
+      getDisableData() {
+        this.$http.post("/disable", this.query)
+            .then(data => {
+              data = data.data
+              if (data.success) {
+                this.pageInfo2 = data.resultObject;
+              } else {
+                this.$message({
+                  message: data.message,
+                  type: 'error'
+                });
+              }
+            })
+            .catch(data => {
+              this.$message({
+                message: '网络错误，请重试！',
+                type: 'error'
+              });
+            })
       },
       disabled(index,row) {
         this.disablesDataShow=true
+        this.handleId=row.id
+        this.query.goodsId = row.id
         //获取报废数据
+        this.getDisableData()
       },
       use(index,row){
         this.saveForm = Object.assign({}, row);
