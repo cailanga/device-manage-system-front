@@ -11,9 +11,6 @@ import Employee from "./views/org/Employee.vue";
 import permission from "./views/auth/Permission.vue";
 import Role from "./views/auth/Role.vue";
 import Menu from "./views/auth/Menu.vue";
-import Config from "./views/sys/Config.vue";
-import Dictionary from "./views/sys/Dictionary.vue";
-import DictionaryItem from "./views/sys/DictionaryItem.vue";
 
 import Procure from "./views/PurchaseReceipt/Procure.vue";
 import Goods from "./views/PurchaseReceipt/Goods.vue";
@@ -27,6 +24,9 @@ import CheckingGoods from "@/views/PurchaseReceipt/CheckingGoods.vue";
 import DevicesOperaterLog from "@/views/PurchaseReceipt/DevicesOperaterLog.vue";
 import CheckingDevices from "@/views/PurchaseReceipt/CheckingDevices.vue";
 import UseRecord from "@/views/PurchaseReceipt/UseRecord.vue";
+import Backup from "@/views/sys/backup.vue";
+import BackupRecord from "@/views/sys/BackupRecord.vue";
+import BackupOperaterLog from "@/views/sys/BackupOperaterLog.vue";
 let routes = [
     {
         path: '/login',
@@ -106,9 +106,9 @@ let routes = [
         name: '系统管理',
         iconCls: 'el-icon-setting',//图标样式class
         children: [
-            { path: '/config', component: Config, name: '系统配置' },
-            { path: '/dictionary', component: Dictionary, name: '数据字典' },
-            { path: '/dictionaryitem', component: DictionaryItem, name: '数据字典明细' },
+            { path: '/backup', component: Backup, name: '系统备份' },
+            { path: '/backupRecord', component: BackupRecord, name: '备份记录' },
+            { path: '/backupOperatorLog', component: BackupOperaterLog, name: '备份操作日志' },
         ]
     },
     
