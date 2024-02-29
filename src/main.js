@@ -1,4 +1,5 @@
 import babelpolyfill from 'babel-polyfill'
+import './assets/common.less'
 import Vue from 'vue'
 import App from './App'
 import ElementUI, {Message} from 'element-ui'
@@ -21,8 +22,14 @@ axios.defaults.baseURL = "http://localhost:8080"
 // axios.defaults.baseURL = "http://192.168.1.190:8081"
 // axios.defaults.baseURL = "http://47.109.101.54:8081"
 Vue.prototype.$http = axios;
+import * as ECharts from 'echarts';
+// 将自动注册所有组件为全局组件
+import dataV from '@jiaminghi/data-view'
 
 
+Vue.config.productionTip = false
+Vue.use(dataV)
+Vue.use(ECharts)
 Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(Vuex)

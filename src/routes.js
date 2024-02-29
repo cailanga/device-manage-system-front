@@ -27,6 +27,9 @@ import UseRecord from "@/views/PurchaseReceipt/UseRecord.vue";
 import Backup from "@/views/sys/backup.vue";
 import BackupRecord from "@/views/sys/BackupRecord.vue";
 import BackupOperaterLog from "@/views/sys/BackupOperaterLog.vue";
+import DeviceInfoShow from "@/views/statistics/DeviceInfoShow.vue";
+import index from "@/components/datav/index.vue";
+import TopRightCmp from "@/components/datav/TopRightCmp.vue";
 let routes = [
     {
         path: '/login',
@@ -109,6 +112,15 @@ let routes = [
             { path: '/backup', component: Backup, name: '系统备份' },
             { path: '/backupRecord', component: BackupRecord, name: '备份记录' },
             { path: '/backupOperatorLog', component: BackupOperaterLog, name: '备份操作日志' },
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '信息统计',
+        iconCls: 'el-icon-setting',//图标样式class
+        children: [
+            { path: '/deviceShow', component: DeviceInfoShow, name: '设备信息统计' }
         ]
     },
     
