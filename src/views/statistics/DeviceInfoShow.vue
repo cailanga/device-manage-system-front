@@ -1,59 +1,58 @@
 <template>
-  <div id="data-view">
-    <dv-full-screen-container style="">
-      <dv-border-box10 style="height: 100%;width: 100%;color: white">
+  <div id="data-view" style="background-color: #f0f0f0">
+    <dv-full-screen-container style="background-color: #f0f0f0">
+      <dv-border-box10 style="height: 100%;width: 100%;color: gray">
         <dv-border-box1 class="digital-text" style="width:100%;margin: 0px auto;font-size: 25px;font-weight: 500">
-          <div style="padding-top: 20px;">
+          <div style="padding-top:5px;">
             <!--            总体设备数量-->
-            <dv-border-box10 style="width: 80%;height: 1%;margin-left: 10%;margin-right: 10%;color: white">
-              <dv-border-box11 style="text-align: center;padding-top: 10px">
-                <span style="color: white" @click="toIndex">设备综合统计</span>
+            <dv-border-box2 style="width: 80%;height: 2%;margin-left: 10%;margin-right: 10%;color: gray;margin-bottom: 0px">
+              <div style="text-align: center;margin-bottom: 0px">
+                <span style="color: gray" @click="toIndex">设备综合统计</span>
+                <dv-border-box-8 dur="10">
                 <dv-border-box-8 :reverse="true" dur="10"
-                                 style="padding-top: 10px;padding-bottom: 5px;margin: 0px auto;text-align: center;color: white">
+                                 style="padding-top: 5px;padding-bottom: 6px;margin: 0px auto;margin-bottom:5px;text-align: center;color: gray">
+
+
+
                   <div style="display: inline-block;margin-right: 10px;">
-                    <dv-border-box12 style="text-align: center;padding: 10px;">
+                    <dv-border-box7 style="text-align: center;padding: 10px;">
                       <div class="digital-text">总设备数量</div>
                       <div class="digital-text" v-text="totalDataInfo.totalNum"></div>
-                    </dv-border-box12>
+                    </dv-border-box7>
                   </div>
                   <div style="display: inline-block;margin-right: 10px;">
-                    <dv-border-box12 style="text-align: center;padding: 10px;">
+                    <dv-border-box7 style="text-align: center;padding: 10px;">
                       <div class="digital-text">入库设备数量</div>
                       <div class="digital-text" v-text="totalDataInfo.inNum"></div>
-                    </dv-border-box12>
+                    </dv-border-box7>
                   </div>
                   <div style="display: inline-block;margin-right: 10px;">
-                    <dv-border-box12 style="text-align: center;padding: 10px;">
+                    <dv-border-box7 style="text-align: center;padding: 10px;">
                       <div class="digital-text">未入库设备数量</div>
                       <div class="digital-text" v-text="totalDataInfo.noInNum"></div>
-                    </dv-border-box12>
+                    </dv-border-box7>
                   </div>
-                  <!--                  <div style="display: inline-block;margin-right: 10px;">
-                                      <dv-border-box12 style="text-align: center;padding: 10px;">
-                                        <div class="digital-text">已使用设备数量</div>
-                                        <div class="digital-text" v-text="totalDataInfo.useNum"></div>
-                                      </dv-border-box12>
-                                    </div>-->
                   <div style="display: inline-block;margin-right: 10px;">
-                    <dv-border-box12 style="text-align: center;padding: 10px;">
+                    <dv-border-box7 style="text-align: center;padding: 10px;">
                       <div class="digital-text">报废设备数量</div>
                       <div class="digital-text" v-text="totalDataInfo.disabledNum"></div>
-                    </dv-border-box12>
+                    </dv-border-box7>
                   </div>
                   <div style="display: inline-block;margin-right: 10px;">
-                    <dv-border-box12 style="text-align: center;padding: 10px;">
+                    <dv-border-box7 style="text-align: center;padding: 10px;">
                       <div class="digital-text">可用设备数量</div>
                       <div class="digital-text" v-text="totalDataInfo.canUseNum"></div>
-                    </dv-border-box12>
+                    </dv-border-box7>
                   </div>
                 </dv-border-box-8>
-              </dv-border-box11>
-            </dv-border-box10>
+                </dv-border-box-8>
+              </div>
+            </dv-border-box2>
             <!--              设备类型数量-->
-            <dv-border-box4
+            <dv-border-box5
                 style="display: inline-block;width: 480px;height:600px!important;;padding: 5px;margin-left: 10px;">
               <div ref="chart" id="chart-container" class="chart-container"
-                   style="margin: 20px;color: white;width: 420px"></div>
+                   style="margin: 20px;color: gray;width: 420px"></div>
               <div class="toolbar"
                    style="padding-bottom: 0px;background: rgba(255,255,255,0.1);width: 450px;text-align: center">
                 <el-form :inline="true">
@@ -93,12 +92,12 @@
                     :total="pageInfo.total">
                 </el-pagination>
               </div>
-            </dv-border-box4>
+            </dv-border-box5>
             <dv-decoration-2 :reverse="true" style="width:5px;height:570px;display: inline-block"/>
             <!--            设备采购趋势-->
-            <dv-border-box12 style="display: inline-block;width: 520px;padding: 5px;color: #18c79c">
+            <dv-border-box12 style="display: inline-block;width: 520px;padding: 5px;color: #18c79c;padding-top: 10px">
               <div ref="chart1" id="chart-container1" class="chart-container1"
-                   style="width: 520px!important;height:500px;color: white"></div>
+                   style="width: 520px!important;height:500px;color: gray"></div>
               <div class="toolbar"
                    style="padding-bottom: 0px;background: rgba(255,255,255,0.1);width: 450px;text-align: center;margin-left: 30px">
                 <el-form :inline="true">
@@ -132,17 +131,17 @@
             <dv-decoration-2 :reverse="true" style="width:5px;height:570px;display: inline-block"/>
             <dv-decoration-2 :reverse="false" style="width:5px;height:570px;display: inline-block"/>
             <!--            设备价格趋势-->
-            <dv-border-box4 :reverse="true" style="display: inline-block;width: 465px;;padding: 5px;margin-left: 10px;">
+            <dv-border-box5 :reverse="true" style="display: inline-block;width: 465px;;padding: 5px;margin-left: 10px;">
               <div class="bottom-right-table-1">
                 <dv-border-box-6 style="height: 198px;width: 444px">
                   <div class="table-name" style="height: 10px">
                     设备信息
                   </div>
                   <dv-scroll-board @click="chart3TableClick" :config="config" ref="scrollBoard"
-                                   style="height: 150px;width: 404px!important;"/>
+                                   style="height: 150px;width: 440px!important;color: #2e6099"/>
                 </dv-border-box-6>
                 <div ref="chart3" id="chart-container3" class="chart-container3"
-                     style="width:450px!important;;color: white;height: 230px;"></div>
+                     style="width:450px!important;;color: gray;height: 230px;"></div>
                 <div class="toolbar"
                      style="padding-bottom: 0px;background: rgba(255,255,255,0.1);width: 420px;text-align: center">
                   <el-form :inline="true">
@@ -168,18 +167,18 @@
                   </el-pagination>
                 </div>
               </div>
-            </dv-border-box4>
+            </dv-border-box5>
           </div>
         </dv-border-box1>
 
       </dv-border-box10>
       <!--      设备统计-->
-      <el-dialog title="" :show-close="false" :visible.sync="deviceCountShow" :modal="false" class="showTable"
+      <el-dialog custom-class="pie-dialog" title="" :show-close="false" :visible.sync="deviceCountShow" :modal-append-to-body="true" :modal="false" class="showTable pie-dialog"
                  width="50%">
-        <div>
-          <dv-border-box8 style="height: 500px;text-align: center">
+        <div class="chart2bg">
+          <dv-border-box9 style="height: 500px;text-align: center;padding-top: 20px;padding-left:2px;">
             <div ref="chart2" id="chart-container2" class="chart-container"></div>
-          </dv-border-box8>
+          </dv-border-box9>
         </div>
       </el-dialog>
 
@@ -677,134 +676,6 @@ export default {
       this.myChart1 = echarts.init(chartDom1);
       this.createChartByType(this.myChart1, "lineAndBar")
 
-      // this.$refs['scrollBoard'].click = this.chart3TableClick
-      // 在这里配置和设置您的图表
-
-      // this.fetchTotalTypes();
-
-      /*const option = {
-        title: {
-          text: '设备类型总数量统计',
-          left: 'center',
-          top: 20,
-          textStyle: {
-            color: '#333',
-            fontSize: 24,
-          },
-        },
-        color: ['#3398DB','#8bc400'], // 自定义图表颜色
-        tooltip: {
-          trigger: 'axis', // 提示框触发方式
-          axisPointer: { // 坐标轴指示器，坐标轴触发有效
-            type: 'shadow', // 默认为直线，可选为：'line' | 'shadow'
-          },
-        },
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true,
-        },
-        xAxis: [
-          {
-            type: 'category',
-            data: this.dataFromBackend.map(item => item.typeName),
-            axisTick: {
-              alignWithLabel: true,
-            },
-            axisLine: {
-              lineStyle: {
-                color: '#ccc', // x轴颜色
-              },
-            },
-          },
-        ],
-        yAxis: [
-          {
-            type: 'value',
-            axisLine: {
-              lineStyle: {
-                color: '#ccc', // y轴颜色
-              },
-            },
-          },
-        ],
-        series: [
-          {
-            name: '数量',
-            type: 'bar',
-            barWidth: '60%', // 柱子宽度
-            data: this.dataFromBackend.map(item => item.total),
-            // 添加样式的数据标签
-            label: {
-              show: true,
-              position: 'top',
-              textStyle: {
-                color: 'black',
-                fontSize: 16
-              }
-            },
-            itemStyle: {
-              // 柱状图上方的圆角设置
-              borderRadius: 5,
-              // 柱状图颜色渐变效果
-              color: new echarts.graphic.LinearGradient(
-                  0, 0, 0, 1,
-                  [
-                    {offset: 0, color: '#83bff6'},
-                    {offset: 0.5, color: '#188df0'},
-                    {offset: 1, color: '#188df0'}
-                  ]
-              )
-            },
-            // 设置图例样式
-            legend: {
-              textStyle: {
-                color: '#333', // 图例文字颜色
-              },
-              bottom: 0,
-            },
-          },
-          {
-            name: '数量',
-            type: 'bar',
-            barWidth: '60%', // 柱子宽度
-            data: this.dataFromBackend1.map(item => item.total),
-            // 添加样式的数据标签
-            label: {
-              show: true,
-              position: 'top',
-              textStyle: {
-                color: 'black',
-                fontSize: 16
-              }
-            },
-            itemStyle: {
-              // 柱状图上方的圆角设置
-              borderRadius: 5,
-              // 柱状图颜色渐变效果
-              color: new echarts.graphic.LinearGradient(
-                  0, 0, 0, 1, // 渐变方向从上到下
-                  [
-                    {offset: 0, color: '#ffa726'}, // 渐变起始颜色（橙色）
-                    {offset: 0.5, color: '#fb8c00'}, // 渐变中间颜色（深橙色）
-                    {offset: 1, color: '#ef5350'} // 渐变终止颜色（红色）
-                  ]
-              )
-            },
-            // 设置图例样式
-            legend: {
-              textStyle: {
-                color: '#333', // 图例文字颜色
-              },
-              bottom: 0,
-            },
-          },
-        ],
-      };
-
-      this.myChart.setOption(option);*/
-
       var that = this;
       this.myChart3 = Highcharts.chart(this.$refs.chart3, {
         chart: {
@@ -843,7 +714,10 @@ export default {
           }
         },
         title: {
-          text: '设备价格趋势'
+          text: '设备价格趋势',
+          style: {
+            color: '#3ec0f7' // 设置标题颜色为红色
+          }
         },
         xAxis: {
           type: 'category',
@@ -853,7 +727,8 @@ export default {
           },
           labels: {
             style: {
-              fontSize: '10px' // 设置X轴标签的字体大小为10px
+              fontSize: '10px', // 设置X轴标签的字体大小为10px
+              color: '#000'
             }
           },
           tickPixelInterval: 150
@@ -866,7 +741,10 @@ export default {
           labels: {
             align: 'right', // Y轴标签显示在右侧
             x: 5, // 可以调整标签相对于轴线的水平位置
-            y: -5 // 可以调整标签相对于轴线的垂直位置
+            y: -5, // 可以调整标签相对于轴线的垂直位置
+            style: {
+              color: '#000'
+            }
           }
         },
         tooltip: {
@@ -880,6 +758,10 @@ export default {
             return '<b>' + this.series.name + '</b><br/>' +
                 this.key + '<br/>' +
                 Highcharts.numberFormat(this.y, 2);
+          },
+          backgroundColor: 'rgba(244, 244, 244,0.5)', // 设置提示框背景颜色为白色
+          style: {
+            color: 'black' // 设置文字颜色为黑色
           }
         },
         legend: {
@@ -923,10 +805,10 @@ export default {
             subtext: '折线图演示',
             left: 'center',
             textStyle: {
-              color: '#f5eac1' // 设置标题文字颜色为红色
+              color: '#7ce7fd' // 设置标题文字颜色为红色
             },
             subtextStyle: {
-              color: '#00FF00' // 设置副标题文字颜色为绿色
+              color: '#858686' // 设置副标题文字颜色为绿色
             }
           },
           tooltip: {
@@ -942,7 +824,7 @@ export default {
             }, {
               name: '已使用数量',
               textStyle: {
-                color: '#00FF00' // 绿色
+                color: '#2f4554' // 绿色
               },
               icon: 'circle' // 使用圆形图标
             }], // 图例数据对应两组数据的显示名称
@@ -1050,10 +932,10 @@ export default {
             subtext: '柱状图演示',
             left: 'center',
             textStyle: {
-              color: '#f5eac1' // 设置标题文字颜色为红色
+              color: '#7ce7fd' // 设置标题文字颜色为红色
             },
             subtextStyle: {
-              color: '#00FF00' // 设置副标题文字颜色为绿色
+              color: '#858686' // 设置副标题文字颜色为绿色
             }
           },
           tooltip: {
@@ -1238,10 +1120,10 @@ export default {
             subtext: '饼图演示',
             left: 'center',
             textStyle: {
-              color: '#f5eac1' // 设置标题文字颜色为红色
+              color: '#7ce7fd' // 设置标题文字颜色为红色
             },
             subtextStyle: {
-              color: '#00FF00' // 设置副标题文字颜色为绿色
+              color: '#858686' // 设置副标题文字颜色为绿色
             }
           },
           tooltip: {
@@ -1300,10 +1182,10 @@ export default {
             subtext: '折线图演示',
             left: 'center',
             textStyle: {
-              color: '#f5eac1' // 设置标题文字颜色为红色
+              color: '#7ce7fd' // 设置标题文字颜色为红色
             },
             subtextStyle: {
-              color: '#00FF00' // 设置副标题文字颜色为绿色
+              color: '#858686' // 设置副标题文字颜色为绿色
             }
           },
           tooltip: {
@@ -1560,75 +1442,79 @@ export default {
 
 <style lang="less">
 //弹出层
-.el-dialog {
+.pie-dialog .el-dialog {
+  border: none !important;
+  box-shadow: none !important;
   /* background: rgba(0, 0, 0, .2) !important; */
-  background: rgba(0, 0, 0, 0.2) !important;
-  border: rgb(8, 255, 243) 1px solid;
-  backdrop-filter: blur(3px);
+  background: rgba(0, 0, 0, 0) !important;
+  //border: rgba(0, 0, 0,0) 0px solid;
+  //border: none;
+  //backdrop-filter: blur(3px);
 }
 
-.el-dialog__title {
-  color: rgb(255, 255, 255);
+.pie-dialog .el-dialog__title {
+  color: rgba(255, 255, 255,0);
   font-weight: 900;
 }
 
-.el-dialog__header {
+.pie-dialog .el-dialog__header {
   color: #fff;
-  background: rgba(0, 0, 0, 0.5);
+  height: 0px !important;
+  background: rgba(208, 244, 237, 0);
   text-align: center;
-  box-shadow: 0 0 1.5vw rgb(97, 255, 255) inset;
-  background: linear-gradient(#74ffef, #74ffef) left top,
-  linear-gradient(#3deeda, #3deeda) left top,
-  linear-gradient(#3deeda, #3deeda) right top,
-  linear-gradient(#3deeda, #3deeda) right top;
+  //box-shadow: 0 0 1.5vw rgb(212, 244, 242) inset;
+  //background: linear-gradient(#bae5e3, #bae5e3) left top,
+  //linear-gradient(#b9e0e2, #b9e0e2) left top,
+  //linear-gradient(#b9e0e2, #b9e0e2) right top,
+  //linear-gradient(#b9e0e2, #b9e0e2) right top;
   /* linear-gradient(#3deeda, #3deeda) left bottom,
   linear-gradient(#3deeda, #3deeda) left bottom,
   linear-gradient(#3deeda, #3deeda) right bottom,
   linear-gradient(#3deeda, #3deeda) right bottom; */
-  background-repeat: no-repeat;
-  background-size: 2px 20px, 20px 2px;
+  //background-repeat: no-repeat;
+  //background-size: 2px 20px, 20px 2px;
 }
 
-.el-dialog__body {
+.pie-dialog .el-dialog__body {
   padding: 20px;
   color: #fff;
-  background: rgba(0, 0, 0, 0.5);
+  //background: rgba(208, 244, 237, 0);
   text-align: left;
-  box-shadow: 0 0 1.5vw rgb(57, 255, 255) inset;
-  background: linear-gradient(#3deeda, #3deeda) left bottom,
-  linear-gradient(#3deeda, #3deeda) left bottom,
-  linear-gradient(#3deeda, #3deeda) right bottom,
-  linear-gradient(#3deeda, #3deeda) right bottom;
-  background-repeat: no-repeat;
-  background-size: 2px 20px, 20px 2px;
+  //box-shadow: 0 0 1.5vw rgb(208, 244, 237) inset;
+  //background: linear-gradient(#bae5e3, #bae5e3) left bottom,
+  //linear-gradient(#bae5e3, #bae5e3) left bottom,
+  //linear-gradient(#bae5e3, #bae5e3) right bottom,
+  //linear-gradient(#bae5e3, #bae5e3) right bottom;
+  //background-repeat: no-repeat;
+  //background-size: 2px 20px, 20px 2px;
 }
 
-.el-form-item__content {
+/*.el-form-item__content {
   background-color: rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 0.5vw rgb(57, 255, 255);
   background-repeat: no-repeat;
   border-radius: 10px;
-}
+}*/
 
-.planTitle {
-  padding: 0 0 0 20px;
-  color: #8ae3e9;
-  font-size: 18px;
-  font-weight: 600;
-}
+//.planTitle {
+//  padding: 0 0 0 20px;
+//  color: #8ae3e9;
+//  font-size: 18px;
+//  font-weight: 600;
+//}
+//
+//.planContent {
+//  color: #e6feff;
+//  font-size: 16px;
+//}
 
-.planContent {
-  color: #e6feff;
-  font-size: 16px;
-}
-
-.el-button--primary {
-  color: #FFF;
-  background-color: #415b5ec2;
-  border-color: #75fbe9;
-  //position: absolute;
-  //margin-left: 374px;
-}
+//.el-button--primary {
+//  color: #FFF;
+//  background-color: #415b5ec2;
+//  border-color: #75fbe9;
+//  //position: absolute;
+//  //margin-left: 374px;
+//}
 
 #data-view {
   width: 100%;
@@ -1637,7 +1523,7 @@ export default {
   color: #fff;
 
   #dv-full-screen-container {
-    background-image: url('./img.png');
+    background-image: url('./1.jpg');
     background-size: 100% 100%;
     box-shadow: 0 0 3px blue;
     display: flex;
@@ -1738,5 +1624,7 @@ body {
 .highcharts-xaxis-title {
   text-align: center;
 }
-
+.chart2bg{
+  background-image: url('./1.jpg')
+}
 </style>

@@ -28,8 +28,6 @@ import Backup from "@/views/sys/backup.vue";
 import BackupRecord from "@/views/sys/BackupRecord.vue";
 import BackupOperaterLog from "@/views/sys/BackupOperaterLog.vue";
 import DeviceInfoShow from "@/views/statistics/DeviceInfoShow.vue";
-import index from "@/components/datav/index.vue";
-import TopRightCmp from "@/components/datav/TopRightCmp.vue";
 let routes = [
     {
         path: '/login',
