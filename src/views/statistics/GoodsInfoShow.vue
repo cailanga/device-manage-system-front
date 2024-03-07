@@ -4,10 +4,10 @@
       <dv-border-box10 style="height: 100%;width: 100%;color: gray">
         <dv-border-box1 class="digital-text" style="width:100%;margin: 0px auto;font-size: 25px;font-weight: 500">
           <div style="padding-top:5px;">
-            <!--            总体设备数量-->
+            <!--            总体物资数量-->
             <dv-border-box2 style="width: 80%;height: 2%;margin-left: 10%;margin-right: 10%;color: gray;margin-bottom: 0px">
               <div style="text-align: center;margin-bottom: 0px">
-                <span style="color: gray" @click="toIndex">设备综合统计</span>
+                <span style="color: gray" @click="toIndex">物资综合统计</span>
                 <dv-border-box-8 dur="10">
                 <dv-border-box-8 :reverse="true" dur="10"
                                  style="padding-top: 5px;padding-bottom: 6px;margin: 0px auto;margin-bottom:5px;text-align: center;color: gray">
@@ -16,31 +16,25 @@
 
                   <div style="display: inline-block;margin-right: 10px;">
                     <dv-border-box7 style="text-align: center;padding: 10px;">
-                      <div class="digital-text">总设备数量</div>
+                      <div class="digital-text">总物资数量</div>
                       <div class="digital-text" v-text="totalDataInfo.totalNum"></div>
                     </dv-border-box7>
                   </div>
                   <div style="display: inline-block;margin-right: 10px;">
                     <dv-border-box7 style="text-align: center;padding: 10px;">
-                      <div class="digital-text">入库设备数量</div>
+                      <div class="digital-text">入库物资数量</div>
                       <div class="digital-text" v-text="totalDataInfo.inNum"></div>
                     </dv-border-box7>
                   </div>
                   <div style="display: inline-block;margin-right: 10px;">
                     <dv-border-box7 style="text-align: center;padding: 10px;">
-                      <div class="digital-text">未入库设备数量</div>
+                      <div class="digital-text">未入库物资数量</div>
                       <div class="digital-text" v-text="totalDataInfo.noInNum"></div>
-                    </dv-border-box7>
-                  </div>
-                  <div style="display: inline-block;margin-right: 10px;">
-                    <dv-border-box7 style="text-align: center;padding: 10px;">
-                      <div class="digital-text">报废设备数量</div>
-                      <div class="digital-text" v-text="totalDataInfo.disabledNum"></div>
                     </dv-border-box7>
                   </div>
                   <div style="display: inline-block;">
                     <dv-border-box7 style="text-align: center;padding: 10px;">
-                      <div class="digital-text">可用设备数量</div>
+                      <div class="digital-text">可用物资数量</div>
                       <div class="digital-text" v-text="totalDataInfo.canUseNum"></div>
                     </dv-border-box7>
                   </div>
@@ -48,7 +42,7 @@
                 </dv-border-box-8>
               </div>
             </dv-border-box2>
-            <!--              设备类型数量-->
+            <!--              物资类型数量-->
             <dv-border-box5
                 style="display: inline-block;width: 480px;height:600px!important;;padding: 5px;margin-left: 10px;">
               <div ref="chart" id="chart-container" class="chart-container"
@@ -94,7 +88,7 @@
               </div>
             </dv-border-box5>
             <dv-decoration-2 :reverse="true" style="width:5px;height:570px;display: inline-block"/>
-            <!--            设备采购趋势-->
+            <!--            物资采购趋势-->
             <dv-border-box12 style="display: inline-block;width: 520px;padding: 5px;color: #18c79c;padding-top: 10px">
               <div ref="chart1" id="chart-container1" class="chart-container1"
                    style="width: 520px!important;height:500px;color: gray"></div>
@@ -130,12 +124,12 @@
             </dv-border-box12>
             <dv-decoration-2 :reverse="true" style="width:5px;height:570px;display: inline-block"/>
             <dv-decoration-2 :reverse="false" style="width:5px;height:570px;display: inline-block"/>
-            <!--            设备价格趋势-->
+            <!--            物资价格趋势-->
             <dv-border-box5 :reverse="true" style="display: inline-block;width: 465px;;padding: 5px;margin-left: 10px;">
               <div class="bottom-right-table-1">
                 <dv-border-box-6 style="height: 198px;width: 444px">
                   <div class="table-name" style="height: 10px">
-                    设备信息
+                    物资信息
                   </div>
                   <dv-scroll-board @click="chart3TableClick" :config="config" ref="scrollBoard"
                                    style="height: 150px;width: 440px!important;color: #2e6099"/>
@@ -172,8 +166,8 @@
         </dv-border-box1>
 
       </dv-border-box10>
-      <!--      设备统计-->
-      <el-dialog custom-class="pie-dialog" title="" :show-close="false" :visible.sync="deviceCountShow" :modal-append-to-body="true" :modal="false" class="showTable pie-dialog"
+      <!--      物资统计-->
+      <el-dialog custom-class="pie-dialog" title="" :show-close="false" :visible.sync="goodsCountShow" :modal-append-to-body="true" :modal="false" class="showTable pie-dialog"
                  width="50%">
         <div class="chart2bg">
           <dv-border-box9 style="height: 500px;text-align: center;padding-top: 20px;padding-left:2px;">
@@ -251,7 +245,7 @@ export default {
         headerBGC: "rgba(0, 192, 255,0.1)",
         oddRowBGC: "rgba(141, 208, 178,0.1)",
         evenRowBGC: "rgba(172, 125, 143,0.1)",
-        header: ['类型编号', '设备名称', "最近价格", '最近时间'],
+        header: ['类型编号', '物资名称', "最近价格", '最近时间'],
         data: [
           // ['行1列1', '行1列2', '行1列3', 1],
           // ['行2列1', '行2列2', '行2列3', 1],
@@ -270,19 +264,17 @@ export default {
         carousel: 'single'
       },
       direction: 'rtl',
-      deviceCountShow: false,
+      goodsCountShow: false,
       totalDataInfo: {
-        //设备总数量
+        //物资总数量
         totalNum: 100,
-        //已入库设备数量
+        //已入库物资数量
         inNum: 10,
-        //未入库设备数量
+        //未入库物资数量
         noInNum: 10,
-        //设备已使用数量
+        //物资已使用数量
         useNum: 50,
-        //报废设备数量
-        disabledNum: 10,
-        //可用设备数量
+        //可用物资数量
         canUseNum: 20,
 
       },
@@ -334,8 +326,8 @@ export default {
         },
         // 更多类型的数据...
       ],
-      //通过设备类型展示设备的信息
-      deviceCountData: [
+      //通过物资类型展示物资的信息
+      goodsCountData: [
         {
           id: 1,
           name: '电脑',
@@ -353,7 +345,7 @@ export default {
         },
         // 更多类型的数据...
       ],
-      deviceCountData1: [
+      goodsCountData1: [
         {
           id: 1,
           name: '电脑',
@@ -464,7 +456,7 @@ export default {
   methods: {
     getTotalDataInfo() {
       // 获取总统计信息
-      this.$http.get('/deviceShow/totalDataInfo')
+      this.$http.get('/goodsShow/totalDataInfo')
           .then(data => {
             // this.totalTypes = response.data.length;
             this.totalDataInfo = data.data.resultObject
@@ -488,14 +480,13 @@ export default {
       const option = this.myChart1.getOption();
       option.xAxis[0].data = this.chart2XData
       option.series[0].data = this.chart2YData[1]
-      option.series[1].data = this.chart2YData[2]
-      option.series[2].data = this.chart2YData[3]
-      option.series[3].data = this.chart2YData[0]
+
+      option.series[1].data = this.chart2YData[0]
       this.myChart1.setOption(option);
     },
     fetchBuyInfos() {
       this.query1.type = this.selectedValue1
-      this.$http.post('/deviceShow/countsWithDevice', this.query1)
+      this.$http.post('/goodsShow/countsWithGoods', this.query1)
           .then(data => {
             // this.totalTypes = response.data.length;
             data = data.data.resultObject
@@ -524,13 +515,13 @@ export default {
       //   ['行19列1', '行19列2', '行19列3', 1],
       //   ['行20列1', '行20列2', '行20列3', 1]
       // ];
-      // 获取设备信息 this.getDevices()
-      this.getDevices()
+      // 获取物资信息 this.getGoods()
+      this.getGoods()
       //更新后默认展示第一条
       // this.chart3TableDataUpdate(chart3TableData1, 1)
     },
-    getDevices() {
-      this.$http.post('/deviceShow/device', this.query3)
+    getGoods() {
+      this.$http.post('/goodsShow/goods', this.query3)
           .then(data => {
             // this.totalTypes = response.data.length;
             data = data.data
@@ -541,17 +532,17 @@ export default {
               //动态折线更新
               // this.myChart3.update({
               //   title: {
-              //     text: this.config.data[0][1] + "设备类型价格趋势"
+              //     text: this.config.data[0][1] + "物资类型价格趋势"
               //   },
               //   series: [{
               //     data: this.chart3Data
               //   }]
               // });
               // console.log(this.myChart3.series[0].data)
-              this.getDevicePriceChangeInfo(this.config.data[0][0])
+              this.getGoodsPriceChangeInfo(this.config.data[0][0])
             }else {
               this.$message({
-                message: '暂无设备信息',
+                message: '暂无物资信息',
                 center: true,
                 type: 'warning'
               });
@@ -561,7 +552,7 @@ export default {
               //动态折线更新
               this.myChart3.update({
                 title: {
-                  text: "设备类型价格趋势"
+                  text: "物资类型价格趋势"
                 },
                 series: [{
                   data: this.chart3Data
@@ -625,16 +616,16 @@ export default {
           price: 70
         }
       ];*/
-      // 根据点击获取到的设备id获取设备的价格变化
-      this.getDevicePriceChangeInfo(data.row[1])
+      // 根据点击获取到的物资id获取物资的价格变化
+      this.getGoodsPriceChangeInfo(data.row[1])
       this.myChart3.update({
         title: {
-          text: data.row[2] + "设备类型价格趋势"
+          text: data.row[2] + "物资类型价格趋势"
         }
       });
     },
-    getDevicePriceChangeInfo(deviceId) {
-      this.$http.post('/deviceShow/devicePriceChange/' + deviceId)
+    getGoodsPriceChangeInfo(goodsId) {
+      this.$http.post('/goodsShow/goodsPriceChange/' + goodsId)
           .then(data => {
             // this.totalTypes = response.data.length;
             data = data.data
@@ -643,7 +634,7 @@ export default {
             if (this.myChart3 && this.myChart3.series && this.myChart3.series[0]) {
               this.myChart3.update({
                 title: {
-                  text: this.config.data[0][1] + "设备类型价格趋势"
+                  text: this.config.data[0][1] + "物资类型价格趋势"
                 },
                 series: [{
                   data: this.chart3Data
@@ -672,12 +663,12 @@ export default {
     },
     loadData() {
       this.fetchTotalTypes();
-      this.getDevicesUseInfo();
+      this.getGoodsUseInfo();
       //总数据
       this.getTotalDataInfo()
       //表格数据
-      // this.getDevices()
-      this.$http.post('/deviceShow/device', this.query3)
+      // this.getGoods()
+      this.$http.post('/goodsShow/goods', this.query3)
           .then(data => {
             // this.totalTypes = response.data.length;
             data = data.data
@@ -688,11 +679,11 @@ export default {
               //动态折线更新
               // this.myChart3.update({
               //   title: {
-              //     text: this.config.data[0][1] + "设备类型价格趋势"
+              //     text: this.config.data[0][1] + "物资类型价格趋势"
               //   }
               // });
-              // this.getDevicePriceChangeInfo(this.config.data[0][0])
-              this.$http.post('/deviceShow/devicePriceChange/' + this.config.data[0][0])
+              // this.getGoodsPriceChangeInfo(this.config.data[0][0])
+              this.$http.post('/goodsShow/goodsPriceChange/' + this.config.data[0][0])
                   .then(data => {
                     // this.totalTypes = response.data.length;
                     data = data.data
@@ -722,7 +713,7 @@ export default {
                                 return
                               }
                               if (!that.chart3Data[i].date){
-                                that.getDevices();
+                                that.getGoods();
                               }
                               var x = that.chart3Data[i].date
                               var y = that.chart3Data[i].price
@@ -737,66 +728,10 @@ export default {
                               // }
                             }, 1000);
                           },
-                          /*afterSetFullscreen: function () {
-                            this.update({ // 更新chart配置
-                              chart: {
-                                backgroundColor: 'white' // 设置全屏模式下的背景颜色
-                              },
-                              title: {
-                                text: that.config.data[0][1]+'设备类型价格趋势',
-                                style: {
-                                  color: '#3ec0f7' // 设置标题颜色为红色
-                                }
-                              },
-                              xAxis: {
-                                type: 'category',
-                                title: {
-                                  text: '购买时间', // 统一说明
-                                  align: 'middle' // 居中显示
-                                },
-                                labels: {
-                                  style: {
-                                    fontSize: '10px', // 设置X轴标签的字体大小为10px
-                                    color: '#000'
-                                  }
-                                },
-                                tickPixelInterval: 150
-                              },
-                              yAxis: {
-                                title: {
-                                  text: "价格(元)",
-                                  align: 'high' // 居中显示
-                                },
-                                labels: {
-                                  align: 'right', // Y轴标签显示在右侧
-                                  x: 5, // 可以调整标签相对于轴线的水平位置
-                                  y: -5, // 可以调整标签相对于轴线的垂直位置
-                                  style: {
-                                    color: '#000'
-                                  }
-                                }
-                              },
-                              tooltip: {
-                                formatter: function () {
-                                  return '<b>' + this.series.name + '</b><br/>' +
-                                      this.key + '<br/>' +
-                                      Highcharts.numberFormat(this.y, 2);
-                                },
-                                backgroundColor: 'rgba(244, 244, 244,0.5)', // 设置提示框背景颜色为白色
-                                style: {
-                                  color: 'black' // 设置文字颜色为黑色
-                                }
-                              },
-                              legend: {
-                                enabled: false,
-                                data: ["时间"]
-                              },
-                            });
-                          },*/
                         }
                       },
                       title: {
-                        text: this.config.data[0][1]+'设备类型价格趋势',
+                        text: this.config.data[0][1]+'物资类型价格趋势',
                         style: {
                           color: '#3ec0f7' // 设置标题颜色为红色
                         }
@@ -867,7 +802,7 @@ export default {
                   });
             }else {
               this.$message({
-                message: '暂无设备信息',
+                message: '暂无物资信息',
                 center: true,
                 type: 'warning'
               });
@@ -901,7 +836,7 @@ export default {
                         }
                         // console.log("test:"+that.chart3Data[i])
                         if (!that.chart3Data[i].date){
-                          that.getDevices();
+                          that.getGoods();
                         }
                         var x = that.chart3Data[i].date
                         var y = that.chart3Data[i].price
@@ -917,7 +852,7 @@ export default {
                   }
                 },
                 title: {
-                  text: '设备类型价格趋势',
+                  text: '物资类型价格趋势',
                   style: {
                     color: '#3ec0f7' // 设置标题颜色为红色
                   }
@@ -988,9 +923,9 @@ export default {
             console.error('Error fetching data: ', error);
           });
     },
-    getDevicesUseInfo() {
+    getGoodsUseInfo() {
       this.query1.type = this.selectedValue1
-      this.$http.post('/deviceShow/countsWithDevice', this.query1)
+      this.$http.post('/goodsShow/countsWithGoods', this.query1)
           .then(data => {
             // this.totalTypes = response.data.length;
             data = data.data.resultObject
@@ -1004,7 +939,7 @@ export default {
           });
     },
     toIndex() {
-      this.$router.push({path: '/device'});
+      this.$router.push({path: '/goods'});
     },
     //处理页面查询条数变化时
     handleSizeChange(val) {
@@ -1032,7 +967,7 @@ export default {
       this.fetchTotalTypes();
     },
     fetchTotalTypes() {
-      this.$http.post('/deviceShow/countsWithType', this.query)
+      this.$http.post('/goodsShow/countsWithType', this.query)
           .then(data => {
             // this.totalTypes = response.data.length;
             data = data.data
@@ -1068,7 +1003,7 @@ export default {
         //折线图
         option = {
           title: {
-            text: '设备类型数量统计',
+            text: '物资类型数量统计',
             subtext: '折线图演示',
             left: 'center',
             textStyle: {
@@ -1169,7 +1104,7 @@ export default {
         //柱状图
         option = {
           title: {
-            text: '设备类型数量统计',
+            text: '物资类型数量统计',
             subtext: '柱状图演示',
             left: 'center',
             textStyle: {
@@ -1267,7 +1202,7 @@ export default {
       } else if (type == "pie") {
         option = {
           title: {
-            text: '设备类型数量统计',
+            text: '物资类型数量统计',
             subtext: '饼图演示',
             left: 'center',
             textStyle: {
@@ -1290,7 +1225,7 @@ export default {
             data: this.dataFromBackend.concat(this.dataFromBackend1).map(item => item.typeName),
           },
           series: [{
-            name: '设备总数量',
+            name: '物资总数量',
             type: 'pie',
             radius: ['40%', '55%'], // 第一个饼图的大小，内半径和外半径
             center: ['50%', '60%'],
@@ -1321,7 +1256,7 @@ export default {
               }
             }
           }, {
-            name: '设备使用数量',
+            name: '物资使用数量',
             type: 'pie',
             // radius: '70%',
             center: ['50%', '60%'],
@@ -1357,7 +1292,7 @@ export default {
       } else if (type == "pie1") {
         option = {
           title: {
-            text: '设备数量统计',
+            text: '物资数量统计',
             subtext: '饼图演示',
             left: 'center',
             textStyle: {
@@ -1377,14 +1312,14 @@ export default {
               color: '#409eff' // 设置图例文字颜色为红色
             },
             // 假设我们有两个数据集的图例
-            data: this.deviceCountData.concat(this.deviceCountData1).map(item => item.name),
+            data: this.goodsCountData.concat(this.goodsCountData1).map(item => item.name),
           },
           series: [{
-            name: '设备总数量',
+            name: '物资总数量',
             type: 'pie',
             radius: "50%", // 第一个饼图的大小，内半径和外半径
             center: ['50%', '60%'],
-            data: this.deviceCountData.map(item => ({
+            data: this.goodsCountData.map(item => ({
               value: item.total,
               name: item.name
             })),
@@ -1415,12 +1350,12 @@ export default {
               }
             }
           },{
-            name: '设备使用数量',
+            name: '物资使用数量',
             type: 'pie',
             // radius: "80%", // 第一个饼图的大小，内半径和外半径
             radius: ['60%', '75%'],
             center: ['50%', '60%'],
-            data: this.deviceCountData1.map(item => ({
+            data: this.goodsCountData1.map(item => ({
               value: item.total,
               name: item.name
             })),
@@ -1455,7 +1390,7 @@ export default {
       } else if (type == "lineAndBar") {
         option = {
           title: {
-            text: '设备采购趋势',
+            text: '物资采购趋势',
             subtext: '折线图演示',
             left: 'center',
             textStyle: {
@@ -1479,18 +1414,6 @@ export default {
               name: '使用量',
               textStyle: {
                 color: '#c23531' // 绿色
-              },
-              icon: 'circle' // 使用圆形图标
-            }, {
-              name: '维修量',
-              textStyle: {
-                color: '#2f4554' // 绿色
-              },
-              icon: 'circle' // 使用圆形图标
-            }, {
-              name: '报废量',
-              textStyle: {
-                color: '#00FF00' // 绿色
               },
               icon: 'circle' // 使用圆形图标
             }], // 图例数据对应两组数据的显示名称
@@ -1548,68 +1471,6 @@ export default {
             // yAxisIndex: 1
           },
             {
-              name: '维修量',
-              data: this.chart2YData[2],
-              type: 'line',
-              smooth: true,
-              areaStyle: {
-                normal: {
-                  color: new echarts.graphic.LinearGradient(
-                      0, 0, 0, 1,
-                      [
-                        {offset: 0, color: '#fb7293'}, // 0% 处的颜色
-                        {offset: 1, color: '#f2f2f2'} // 100% 处的颜色
-                      ]
-                  )
-                }
-              },
-              lineArea: {
-                show: true,
-                gradient: ['rgba(251, 114, 147, 1)', 'rgba(251, 114, 147, 0)']
-              },
-              lineStyle: {
-                stroke: 'rgba(251, 114, 147, 1)',
-                lineDash: [3, 3]
-              },
-              linePoint: {
-                style: {
-                  stroke: 'rgba(251, 114, 147, 1)'
-                }
-              },
-              // yAxisIndex: 1
-            },
-            {
-              name: '报废量',
-              data: this.chart2YData[3],
-              type: 'line',
-              smooth: true,
-              areaStyle: {
-                normal: {
-                  color: new echarts.graphic.LinearGradient(
-                      0, 0, 0, 1,
-                      [
-                        {offset: 0, color: 'green'}, // 0% 处的颜色
-                        {offset: 1, color: 'yellow'} // 100% 处的颜色
-                      ]
-                  )
-                }
-              },
-              lineArea: {
-                show: true,
-                gradient: ['rgba(251, 114, 147, 1)', 'rgba(251, 114, 147, 0)']
-              },
-              lineStyle: {
-                stroke: 'rgba(251, 114, 147, 1)',
-                lineDash: [3, 3]
-              },
-              linePoint: {
-                style: {
-                  stroke: 'rgba(251, 114, 147, 1)'
-                }
-              },
-              // yAxisIndex: 1
-            },
-            {
               name: '入库量',
               data: this.chart2YData[0],
               type: 'bar',
@@ -1643,14 +1504,14 @@ export default {
         this.fetchDetailData(item.typeId);
       }
     },
-    getDevicesByTypeId(typeId) {
-      this.$http.get('/device/devicesByTypeId/'+typeId)
+    getGoodsByTypeId(typeId) {
+      this.$http.get('/goods/goodsByTypeId/'+typeId)
           .then(data => {
             // this.totalTypes = response.data.length;
-            // this.deviceCountData = data.data.resultObject
-            this.deviceCountData = data.data.resultObject.map(item => ({"id":item.id, "name":item.name,"total":item.count}))
-            this.deviceCountData1 = data.data.resultObject.map(item => ({"id":item.id, "name":item.name,"total":item.useCount}))
-            this.deviceCountShow = true;
+            // this.goodsCountData = data.data.resultObject
+            this.goodsCountData = data.data.resultObject.map(item => ({"id":item.id, "name":item.name,"total":item.count}))
+            this.goodsCountData1 = data.data.resultObject.map(item => ({"id":item.id, "name":item.name,"total":item.useCount}))
+            this.goodsCountShow = true;
             this.$nextTick(() => {
               var chartDom1 = this.$refs.chart2;
               if (chartDom1) {
@@ -1669,9 +1530,9 @@ export default {
       // console.log('Fetching details for typeId:', typeId);
 
       // 实际操作中，可以使用axios或者vue-resource等来请求数据
-      this.deviceCountShow = true;
-      // 图表点击事件通过设备类型id获取设备信息
-      this.getDevicesByTypeId(typeId);
+      this.goodsCountShow = true;
+      // 图表点击事件通过物资类型id获取物资信息
+      this.getGoodsByTypeId(typeId);
       // this.$nextTick(() => {
       //   var chartDom1 = this.$refs.chart2;
       //   if (chartDom1) {
