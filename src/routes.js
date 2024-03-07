@@ -28,7 +28,14 @@ import Backup from "@/views/sys/backup.vue";
 import BackupRecord from "@/views/sys/BackupRecord.vue";
 import BackupOperaterLog from "@/views/sys/BackupOperaterLog.vue";
 import DeviceInfoShow from "@/views/statistics/DeviceInfoShow.vue";
+import GoodsInfoShow from "@/views/statistics/GoodsInfoShow.vue";
 let routes = [
+    {
+        path: '/',
+        component: Login,
+        name: '登录',
+        hidden: true
+    },
     {
         path: '/login',
         component: Login,
@@ -118,7 +125,8 @@ let routes = [
         name: '信息统计',
         iconCls: 'el-icon-setting',//图标样式class
         children: [
-            { path: '/deviceShow', component: DeviceInfoShow, name: '设备信息统计' }
+            { path: '/deviceShow', component: DeviceInfoShow, name: '设备信息统计' },
+            { path: '/goodsShow', component: GoodsInfoShow, name: '物资信息统计' }
         ]
     },
     

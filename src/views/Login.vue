@@ -1,7 +1,7 @@
 <template>
     <el-form :model="loginForm" :rules="rules2" ref="loginForm" label-position="left" label-width="0px"
              class="demo-ruleForm login-container">
-        <h3 class="title">系统登录</h3>
+        <h3 class="title">物资设备管理系统登录</h3>
         <el-form-item prop="username">
             <el-input type="text" v-model="loginForm.username" auto-complete="off" placeholder="账号"></el-input>
         </el-form-item>
@@ -9,7 +9,7 @@
             <el-input type="password" v-model="loginForm.password" auto-complete="off"
                       placeholder="密码"></el-input>
         </el-form-item>
-        <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
+<!--        <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>-->
         <el-form-item style="width:100%;">
             <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2" :loading="logining">
                 登录
@@ -22,7 +22,7 @@
 <script>
 // import { requestLogin } from '../api/api';
 //import NProgress from 'nprogress'
-import {registerPermissionDirective } from '../main.js'
+// import {registerPermissionDirective } from '../main.js'
 export default {
     data() {
         return {
@@ -71,7 +71,7 @@ export default {
                             this.getPermissionsByEmployeeId(data.resultObject.employee.id);
                             localStorage.setItem('loginUser', JSON.stringify(data.resultObject.employee));
                             localStorage.setItem('token', data.resultObject.token);
-                            this.$router.push({path: '/'});
+                            this.$router.push({path: '/echarts'});
                         }
                     });
                 } else {

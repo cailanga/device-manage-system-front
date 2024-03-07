@@ -86,6 +86,12 @@ router.beforeEach((to, from, next) => {
     if (to.path == '/login') {
         localStorage.removeItem('loginUser');
         localStorage.removeItem('token');
+        next(); // 继续导航
+        return
+    }
+    if (to.path == '/') {
+        next({path: '/login'})
+        return
     }
     let user = JSON.parse(localStorage.getItem('loginUser'));
     if (!user && to.path != '/login') {
