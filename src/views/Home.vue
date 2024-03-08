@@ -56,7 +56,7 @@
                 <el-menu :default-active="$route.path" class="el-menu-vertical-demo" @open="handleopen"
                          @close="handleclose" @select="handleselect"
                          unique-opened router v-show="!collapsed">
-                    <el-menu-item index="/echarts" key="/echarts"><i class="fa fa-bar-chart"></i>首页</el-menu-item>
+                    <el-menu-item index="/index" key="/index"><i class="fa fa-bar-chart"></i>首页</el-menu-item>
                     <template v-for="(item,index) in menuTree">
                         <el-submenu :index="index+''">
                             <template slot="title"><i :class="item.icon"></i>{{ item.name }}</template>
@@ -122,7 +122,7 @@
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button @click="updatePwdShow = false">取 消</el-button>
           <el-button type="primary" @click="submitUpdatePassword">确 定</el-button>
         </div>
       </el-dialog>

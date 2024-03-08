@@ -29,6 +29,10 @@ import BackupRecord from "@/views/sys/BackupRecord.vue";
 import BackupOperaterLog from "@/views/sys/BackupOperaterLog.vue";
 import DeviceInfoShow from "@/views/statistics/DeviceInfoShow.vue";
 import GoodsInfoShow from "@/views/statistics/GoodsInfoShow.vue";
+import Notice from "@/views/notice/Notice.vue";
+import CheckingNotice from "@/views/notice/CheckingNotice.vue";
+import NoticeOperaterLog from "@/views/notice/NoticeOperaterLog.vue";
+import Index from "@/views/Index.vue";
 let routes = [
     {
         path: '/',
@@ -60,9 +64,9 @@ let routes = [
         name: '首页',
         iconCls: 'fa fa-bar-chart',
         leaf: true,
-        redirect: '/echarts', // 添加此行以重定向到echarts组件
+        redirect: '/index', // 添加此行以重定向到echarts组件
         children: [
-            { path: '/echarts', component: echarts, name: '首页' }
+            { path: '/index', component: Index, name: '首页' }
         ]
     },
     {
@@ -127,6 +131,17 @@ let routes = [
         children: [
             { path: '/deviceShow', component: DeviceInfoShow, name: '设备信息统计' },
             { path: '/goodsShow', component: GoodsInfoShow, name: '物资信息统计' }
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '通知管理',
+        iconCls: 'el-icon-setting',//图标样式class
+        children: [
+            { path: '/notice', component: Notice, name: '通知信息' },
+            { path: '/checkingNotice', component: CheckingNotice, name: '待审核通知' },
+            { path: '/noticeOperaterLog', component: NoticeOperaterLog, name: '通知操作日志' },
         ]
     },
     

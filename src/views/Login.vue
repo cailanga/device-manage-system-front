@@ -71,7 +71,7 @@ export default {
                             this.getPermissionsByEmployeeId(data.resultObject.employee.id);
                             localStorage.setItem('loginUser', JSON.stringify(data.resultObject.employee));
                             localStorage.setItem('token', data.resultObject.token);
-                            this.$router.push({path: '/echarts'});
+                            this.$router.push({path: '/index'});
                         }
                     });
                 } else {
