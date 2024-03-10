@@ -217,7 +217,7 @@ export default {
               //在级联选择器中，给当前部门禁用
               this.deptTree = this.deptTree.map(item=>{
                 if (item.id===this.saveForm.id) {
-                  item.disabled = true
+                  // item.disabled = true
                 }else {
                   let children = item.children;
                   if (children!=null&&children.length>0) {
@@ -342,7 +342,7 @@ export default {
           this.$refs.saveForm.validate((valid) => {
             if (valid) {
               this.$confirm('确认提交吗？', '提示', {}).then(() => {
-                this.saveLoading = true;
+                // this.saveLoading = true;
                 let parent = this.saveForm.deptParent;
                 if(parent==null||parent.length===0) {
                   //此情况为一级部门
@@ -381,9 +381,10 @@ export default {
                   user = JSON.parse(user);
                   this.saveForm.operatorId = user.id
                 }
+                this.saveLoading = true;
                 //设备
                 this.saveForm.type = 1;
-                this.$http.put("/useRecord", this.saveForm).then((data) => {
+                this.$http.put("/useRecord/goods", this.saveForm).then((data) => {
                   this.saveLoading = false;
                   data = data.data
                   if (data.success) {
