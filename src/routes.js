@@ -33,6 +33,7 @@ import Notice from "@/views/notice/Notice.vue";
 import CheckingNotice from "@/views/notice/CheckingNotice.vue";
 import NoticeOperaterLog from "@/views/notice/NoticeOperaterLog.vue";
 import Index from "@/views/Index.vue";
+import InterfaceDoc from "@/views/sys/InterfaceDoc.vue";
 let routes = [
     {
         path: '/',
@@ -121,6 +122,7 @@ let routes = [
             { path: '/backup', component: Backup, name: '系统备份' },
             { path: '/backupRecord', component: BackupRecord, name: '备份记录' },
             { path: '/backupOperatorLog', component: BackupOperaterLog, name: '备份操作日志' },
+            { path: '/interfaceDoc', component: InterfaceDoc, name: '系统接口文档' },
         ]
     },
     {
