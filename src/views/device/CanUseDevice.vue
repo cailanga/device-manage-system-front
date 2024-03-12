@@ -98,6 +98,7 @@
           </el-form-item>
           <el-form-item label="领取部门">
             <el-cascader
+                disabled
                 v-model="saveForm.deptParent"
                 :options="deptTree"
                 :props="{
@@ -108,7 +109,7 @@
                             }"></el-cascader>
           </el-form-item>
           <el-form-item label="领用人">
-            <el-select v-model="saveForm.useId">
+            <el-select v-model="saveForm.useId" filterable>
               <el-option :value="item.id" :label="item.username" v-for="item in employees"/>
             </el-select>
           </el-form-item>
@@ -187,23 +188,40 @@ export default {
           this.saveForm.max = row.count - row.useCount
           //由于在页面中会调用id，在没有对应对象的数据时，会报错，
           // 因此给对象为null的对象添加id
-          if (!this.saveForm.deptParent) {
+          // if (!this.saveForm.deptParent) {
             //parent为null，此时为一级部门
-            this.saveForm.deptParent = {
-              id: null
-            }
-          }else {
+            // this.saveForm.deptParent = {
+            //   id: null
+          //   }
+          // }else {
             //获取部门id数组
-            let path=[];
-            if(row.path){
-              path = row.deptIdPath
-                  .substring(1,row.deptIdPath.lastIndexOf("/"))
-                  .split("/")
-                  .map(item=>parseInt(item));
-            }
-            console.log(path)
-            this.saveForm.deptParent = path;
-          }
+            // if(row.path){
+            //   path = row.deptIdPath
+            //       .substring(1,row.deptIdPath.lastIndexOf("/"))
+            //       .split("/")
+            //       .map(item=>parseInt(item));
+            // }
+            var user = localStorage.getItem('loginUser');
+            user = JSON.parse(user);
+            //查询当前登录者所在部门路径
+            this.$http.get("/department/"+user.departmentId)
+                .then(data=>{
+                  data = data.data
+                  if (data.success){
+                    data = data.resultObject
+                    this.saveForm.deptParent = data.path
+                          .split("/")
+                          .filter(item=>item!="")
+                          .map(item=>parseInt(item));
+                    // console.log(this.saveForm.deptParent)
+                  }else {
+                    this.$message({
+                      message: '网络错误，请重试！',
+                      type: 'error'
+                    });
+                  }
+                })
+          // }
           this.getDeptTree();
           this.getDevicesTypes();
           this.getSellers();
@@ -259,7 +277,7 @@ export default {
         //获取列表
         getDevices() {
             this.listLoading = true;
-            this.$http.post("/device", this.query)
+            this.$http.post("/device/byDept", this.query)
                 .then(data => {
                     this.listLoading = false;
                     data = data.data

@@ -1004,7 +1004,7 @@ export default {
           });
     },
     toIndex() {
-      this.$router.push({path: '/device'});
+      this.$router.push({path: '/index'});
     },
     //处理页面查询条数变化时
     handleSizeChange(val) {

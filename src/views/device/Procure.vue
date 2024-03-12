@@ -1,114 +1,6 @@
 <template>
     <section>
       <el-tabs v-model="activeName" type="border-card" @tab-click="handleTabClick">
-        <el-tab-pane label="物资" name="goods">
-          <!--工具条-->
-          <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-            <el-form :inline="true">
-              <el-form-item>
-                <el-input v-model="query1.keyword" placeholder="关键字"></el-input>
-              </el-form-item>
-              <el-form-item>
-                <el-button type="primary" v-on:click="search1">查询</el-button>
-              </el-form-item>
-              <el-form-item>
-                <el-button type="primary" @click="handleAdd1">采购</el-button>
-              </el-form-item>
-              <el-form-item>
-                <el-button type="primary" @click="warehousing1" :disabled="this.sels1.length===0">入库</el-button>
-              </el-form-item>
-            </el-form>
-          </el-col>
-
-          <!--列表-->
-          <el-table :data="pageInfo1.rows" highlight-current-row v-loading="listLoading1" @selection-change="selsChange1"
-                    style="width: 100%;">
-            <el-table-column type="selection" width="55">
-            </el-table-column>
-            <el-table-column type="index" width="60">
-            </el-table-column>
-            <el-table-column prop="name" label="名称" sortable>
-            </el-table-column>
-            <el-table-column prop="price" label="价格" sortable>
-            </el-table-column>
-            <el-table-column prop="count" label="数量" sortable>
-            </el-table-column>
-            <el-table-column prop="description" label="描述" sortable>
-            </el-table-column>
-            <el-table-column prop="type.name" label="类型" sortable>
-            </el-table-column>
-            <el-table-column prop="seller.name" label="商家" sortable>
-            </el-table-column>
-            <el-table-column prop="status" label="状态" sortable>
-              <template slot-scope="scope">
-                <span v-if="scope.row.status === 0" style="color: #5e7382">
-                 未入库
-                </span>
-                <span v-else-if="scope.row.status === 1" style="color: #dea726">
-                   审批中
-                </span>
-                <span v-else-if="scope.row.status === 2" style="color: #11b95c">
-                   已入库
-                </span>
-                <span v-else-if="scope.row.status === -1" style="color: #e64242">
-                   入库失败
-                </span>
-              </template>
-            </el-table-column>
-            <el-table-column label="操作" fixed="right" width="150">
-              <template scope="scope">
-                <el-button size="small" @click="handleEdit1(scope.$index, scope.row)">编辑</el-button>
-                <el-button type="danger" size="small" @click="handleDel1(scope.$index, scope.row)">删除</el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-
-          <!--工具条-->
-          <el-col :span="24" class="toolbar">
-            <el-button type="danger" @click="batchRemove1" :disabled="this.sels1.length===0">批量删除</el-button>
-            <el-pagination
-                @size-change="handleSizeChange1"
-                @current-change="handleCurrentChange1"
-                :current-page="query1.currentPage"
-                :page-sizes="pageSizes1"
-                :page-size="query1.pageSize"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="pageInfo1.total">
-            </el-pagination>
-          </el-col>
-
-          <!--新增界面-->
-          <el-dialog title="采购" :visible.sync="saveFormVisible1" :close-on-click-modal="false">
-            <el-form :model="saveForm1" label-width="80px" :rules="saveFormRules1" ref="saveForm1">
-              <el-form-item label="名称">
-                <el-input v-model="saveForm1.name" auto-complete="off"></el-input>
-              </el-form-item>
-              <el-form-item label="价格">
-                <el-input v-model="saveForm1.price" auto-complete="off"></el-input>
-              </el-form-item>
-              <el-form-item label="数量">
-                <el-input v-model="saveForm1.count" auto-complete="off" :min="1"></el-input>
-              </el-form-item>
-              <el-form-item label="描述">
-                <el-input v-model="saveForm1.description" auto-complete="off"></el-input>
-              </el-form-item>
-              <el-form-item label="类型">
-                <el-select v-model="saveForm1.typeId">
-                  <el-option :value="item.id" :label="item.name" v-for="item in goodsTypes"/>
-                </el-select>
-              </el-form-item>
-              <el-form-item label="商家">
-                <el-select v-model="saveForm1.sellerId">
-                  <el-option :value="item.id" :label="item.name" v-for="item in sellers"/>
-                </el-select>
-              </el-form-item>
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-              <el-button @click.native="saveFormVisible1=false">取消</el-button>
-              <el-button type="primary" @click.native="saveSubmit1" :loading="saveLoading1">提交</el-button>
-            </div>
-          </el-dialog>
-        </el-tab-pane>
         <el-tab-pane label="设备" name="device">
           <!--工具条-->
           <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
@@ -243,7 +135,7 @@
 export default {
     data() {
         return {
-          activeName: 'goods', // 当前选中的Tab页名称
+          activeName: 'device', // 当前选中的Tab页名称
           listLoading1: false,
           query1: {
             currentPage: 1,
@@ -328,7 +220,7 @@ export default {
         var ids = this.sels.map(item => item.id);
         if(ids.length==0){
           this.$message({
-            message: "请选中未入库或入库失败的物资进行入库！",
+            message: "请选中未入库或入库失败的设备进行入库！",
             type: 'error'
           });
           return
@@ -761,7 +653,7 @@ export default {
         }
     },
     mounted() {
-        this.getGoods();
+        this.getDevices();
         this.getSellers()
     },
     watch: {

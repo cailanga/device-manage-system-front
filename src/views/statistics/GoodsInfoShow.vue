@@ -939,7 +939,7 @@ export default {
           });
     },
     toIndex() {
-      this.$router.push({path: '/goods'});
+      this.$router.push({path: '/index'});
     },
     //处理页面查询条数变化时
     handleSizeChange(val) {

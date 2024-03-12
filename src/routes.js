@@ -12,18 +12,19 @@ import permission from "./views/auth/Permission.vue";
 import Role from "./views/auth/Role.vue";
 import Menu from "./views/auth/Menu.vue";
 
-import Procure from "./views/PurchaseReceipt/Procure.vue";
-import Goods from "./views/PurchaseReceipt/Goods.vue";
-import GoodsType from "./views/PurchaseReceipt/GoodsType.vue";
-import Device from "./views/PurchaseReceipt/Device.vue";
-import DeviceType from "./views/PurchaseReceipt/DevicesType.vue";
+import DeviceProcure from "./views/device/Procure.vue";
+import GoodsProcure from "./views/goods/Procure.vue";
+import Goods from "./views/goods/Goods.vue";
+import GoodsType from "./views/goods/GoodsType.vue";
+import Device from "./views/device/Device.vue";
+import DeviceType from "./views/device/DevicesType.vue";
 import Seller from "./views/org/Seller.vue";
 import SellerType from "./views/org/SellerType.vue";
-import GoodsOperaterLog from "@/views/PurchaseReceipt/GoodsOperaterLog.vue";
-import CheckingGoods from "@/views/PurchaseReceipt/CheckingGoods.vue";
-import DevicesOperaterLog from "@/views/PurchaseReceipt/DevicesOperaterLog.vue";
-import CheckingDevices from "@/views/PurchaseReceipt/CheckingDevices.vue";
-import UseRecord from "@/views/PurchaseReceipt/UseRecord.vue";
+import GoodsOperaterLog from "@/views/goods/GoodsOperaterLog.vue";
+import CheckingGoods from "@/views/goods/CheckingGoods.vue";
+import DevicesOperaterLog from "@/views/device/DevicesOperaterLog.vue";
+import CheckingDevices from "@/views/device/CheckingDevices.vue";
+import UseRecord from "@/views/useRecord/UseRecord.vue";
 import Backup from "@/views/sys/backup.vue";
 import BackupRecord from "@/views/sys/BackupRecord.vue";
 import BackupOperaterLog from "@/views/sys/BackupOperaterLog.vue";
@@ -35,6 +36,9 @@ import NoticeOperaterLog from "@/views/notice/NoticeOperaterLog.vue";
 import Index from "@/views/Index.vue";
 import InterfaceDoc from "@/views/sys/InterfaceDoc.vue";
 import DbMonitor from "@/views/sys/DbMonitor.vue";
+import CanUseDevice from "@/views/device/CanUseDevice.vue";
+import UseRecordByPerson from "@/views/useRecord/UseRecordByPerson.vue";
+import CanUseGoods from "@/views/goods/CanUseGoods.vue";
 let routes = [
     {
         path: '/',
@@ -54,12 +58,12 @@ let routes = [
         name: '',
         hidden: true
     },
-    // {
-    //     path: '/403',
-    //     component: NoPermission,
-    //     name: '',
-    //     hidden: true
-    // },
+    {
+        path: '/403',
+        component: NoPermission,
+        name: '',
+        hidden: true
+    },
     {
         path: '/',
         component: Home,
@@ -71,23 +75,65 @@ let routes = [
             { path: '/index', component: Index, name: '首页' }
         ]
     },
+    // {
+    //     path: '/',
+    //     component: Home,
+    //     name: '物资设备',
+    //     iconCls: 'el-icon-message',//图标样式class
+    //     children: [
+    //         { path: '/procure', component: GoodsProcure, name: '采购入库'},
+    //         { path: '/goods', component: Goods, name: '物资'},
+    //         { path: '/goodsType', component: GoodsType, name: '物资类型'},
+    //         { path: '/goodsOperaterLog', component: GoodsOperaterLog, name: '物资操作日志'},
+    //         { path: '/checkingGoods', component: CheckingGoods, name: '待审核物资'},
+    //
+    //         { path: '/device', component: Device, name: '设备'},
+    //         { path: '/deviceType', component: DeviceType, name: '设备类型'},
+    //         { path: '/devicesOperaterLog', component: DevicesOperaterLog, name: '设备操作日志'},
+    //         { path: '/checkingDevices', component: CheckingDevices, name: '待审核设备'},
+    //         { path: '/useRecord', component: UseRecord, name: '领用记录'},
+    //     ]
+    // },
+
     {
         path: '/',
         component: Home,
-        name: '物资设备',
+        name: '物资管理',
         iconCls: 'el-icon-message',//图标样式class
         children: [
-            { path: '/procure', component: Procure, name: '采购入库'},
+            { path: '/goods/procure', component: GoodsProcure, name: '采购入库'},
             { path: '/goods', component: Goods, name: '物资'},
             { path: '/goodsType', component: GoodsType, name: '物资类型'},
             { path: '/goodsOperaterLog', component: GoodsOperaterLog, name: '物资操作日志'},
             { path: '/checkingGoods', component: CheckingGoods, name: '待审核物资'},
+            // { path: '/useRecord', component: UseRecord, name: '领用记录'},
+            { path: '/canUseGoods', component: CanUseGoods, name: '可领用物资'},
+        ]
+    },
 
+    {
+        path: '/',
+        component: Home,
+        name: '设备管理',
+        iconCls: 'el-icon-message',//图标样式class
+        children: [
+            { path: '/device/procure', component: DeviceProcure, name: '采购入库'},
             { path: '/device', component: Device, name: '设备'},
             { path: '/deviceType', component: DeviceType, name: '设备类型'},
-            { path: '/devicesOperaterLog', component: DevicesOperaterLog, name: '设备操作日志'},
-            { path: '/checkingDevices', component: CheckingDevices, name: '待审核设备'},
+            { path: '/deviceOperaterLog', component: DevicesOperaterLog, name: '设备操作日志'},
+            { path: '/checkingDevice', component: CheckingDevices, name: '待审核设备'},
+            // { path: '/useRecord', component: UseRecord, name: '领用记录'},
+            { path: '/canUseDevice', component: CanUseDevice, name: '可领用设备'},
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: '领用记录',
+        iconCls: 'el-icon-message',//图标样式class
+        children: [
             { path: '/useRecord', component: UseRecord, name: '领用记录'},
+            { path: '/useRecordByPerson', component: UseRecordByPerson, name: '个人领用记录'},
         ]
     },
 

@@ -1,8 +1,9 @@
 <template>
     <div>
         <p class="page-container">403 Forbidden</p>
-        <div style="width:100px;margin: 0px auto;">
-            <el-button @click="logout" type="primary">退出登录</el-button>
+        <div style="width:300px;margin: 0px auto;text-align: center">
+          <el-button @click="toIndex" type="primary" style="display: inline">返回首页</el-button>
+          <el-button @click="logout" type="danger" style="display: inline">退出登录</el-button>
         </div>
     </div>
 </template>
@@ -15,6 +16,9 @@ export default {
         }
     },
     methods: {
+      toIndex(){
+        this.$router.push('/index');
+      },
         //退出登录
         logout: function () {
             this.$confirm('确认退出吗?', '提示', {
